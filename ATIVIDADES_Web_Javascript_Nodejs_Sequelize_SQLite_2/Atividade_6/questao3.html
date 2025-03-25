@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Pokémon</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1e2a47, #2a3b59);
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      margin-top: 50px;
+      margin-bottom: -10px;
+    }
+
+    button {
+      background: #3b4cca;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #20296e;
+    }
+
+    #battle-log {
+      margin-top: 20px;
+    }
+
+    #score-board {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: white;
+    }
+
+    .deck {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+      margin-bottom: 100px;
+    }
+
+    .card {
+      position: relative;
+      width: 160px;
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-front {
+      background: #3b4cca;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 0.9rem;
+      gap: 5px;
+      margin-bottom: 20px;
+      padding: 10px;
+      transform: rotateY(180deg);
+    }
+
+    .card-back {
+      background: gray;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .battle-result {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    #restart-btn {
+      display: none;
+      margin-top: 20px;
+      background: #e74c3c;
+    }
+
+    #restart-btn:hover {
+      background: #c0392b;
+    }
+
+    p {
+      margin-bottom: -10px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .deck {
+        justify-content: center;
+      }
+
+      .card {
+        width: 140px;
+        height: 180px;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      .battle-result {
+        font-size: 1.2rem;
+      }
+
+      p {
+        margin-bottom: -15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .card {
+        width: 120px;
+        height: 160px;
+      }
+
+      button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      .battle-result {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Jogo de Pokémon</h1>
+
+  <button id="mode-1v1">Jogar 1v1</button>
+
+  <button id="draw-pokemon" style="display:none;">Puxar Carta</button>
+  <button id="start-battle" style="display: none;">Iniciar Batalha</button>
+  <button id="restart-btn" style="display:none;">Reiniciar Jogo</button>
+
+  <div id="battle-log"></div>
+
+  <div id="score-board">
+    <p>Placar: Jogador 1 | <span id="player1-score">0</span> - <span id="player2-score">0</span> | Jogador 2</p>
+  </div>
+
+  <h3>Time do Jogador 1:</h3>
+  <div id="player1-deck" class="deck"></div>
+  <h3>Time do Jogador 2:</h3>
+  <div id="player2-deck" class="deck"></div>
+
+  <script>
+    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+    let player1Deck = [], player2Deck = [], gameMode = '', currentPlayer = 1, battleLog = '';
+    let player1Score = 0, player2Score = 0;
+
+    const getRandomPokemon = () => fetch(`${apiUrl}/${Math.floor(Math.random() * 151) + 1}`).then(res => res.json());
+
+    const calculatePower = (pokemon) => pokemon.stats[1].base_stat + pokemon.stats[2].base_stat + pokemon.stats[5].base_stat;
+
+    const getColorByPower = (power) => {
+      if (power < 100) return "gray";
+      if (power < 200) return "magenta";
+      if (power < 300) return "yellow";
+      return "orange";
+    };
+
+    const displayPokemon = (pokemon, containerId) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const cardInner = document.createElement("div");
+      cardInner.className = "card-inner";
+
+      const cardFront = document.createElement("div");
+      cardFront.className = "card-front";
+      const power = calculatePower(pokemon);
+      cardFront.innerHTML =
+        `<img src="${pokemon.sprites.front_default}" alt="${pokemon.name}" style="width: 180px; height: 180px; margin-top: -90px; margin-bottom: -40px;">
+        <p style="color: ${getColorByPower(power)}">${pokemon.name.toUpperCase()}</p>
+        <p>ATAQUE: ${pokemon.stats[1].base_stat}</p>
+        <p>DEFESA: ${pokemon.stats[2].base_stat}</p>
+        <p>FORÇA: ${pokemon.stats[5].base_stat}</p>`;
+
+      const cardBack = document.createElement("div");
+      cardBack.className = "card-back";
+      cardBack.innerText = "❓";
+
+      cardInner.appendChild(cardFront);
+      cardInner.appendChild(cardBack);
+      card.appendChild(cardInner);
+
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+        if (card.classList.contains("flipped")) {
+          cardFront.style.display = "flex";
+        } else {
+          cardFront.style.display = "none";
+        }
+      });
+
+      document.getElementById(containerId).appendChild(card);
+    };
+
+    const setGameMode = (mode) => {
+      gameMode = mode;
+      document.getElementById("mode-1v1").style.display = "none";
+      document.getElementById("draw-pokemon").style.display = "inline-block";
+    };
+
+    document.getElementById("mode-1v1").addEventListener("click", () => setGameMode('1v1'));
+
+    document.getElementById("draw-pokemon").addEventListener("click", () => {
+      if (currentPlayer === 1 && player1Deck.length < 5) {
+        getRandomPokemon().then(player1Pokemon => {
+          player1Deck.push(player1Pokemon);
+          displayPokemon(player1Pokemon, "player1-deck");
+          toggleTurn();
+        });
+      } else if (currentPlayer === 2 && player2Deck.length < 5) {
+        getRandomPokemon().then(player2Pokemon => {
+          player2Deck.push(player2Pokemon);
+          displayPokemon(player2Pokemon, "player2-deck");
+          toggleTurn();
+        });
+      }
+    });
+
+    const toggleTurn = () => {
+      currentPlayer = currentPlayer === 1 ? 2 : 1;
+      if (player1Deck.length === 1 && player2Deck.length === 1) {
+        document.getElementById("start-battle").style.display = "inline-block";
+      }
+    };
+
+    document.getElementById("start-battle").addEventListener("click", () => {
+      document.getElementById("start-battle").style.display = "none";
+      playRound();
+    });
+
+    const playRound = () => {
+      let player1Pokemon = player1Deck.shift();
+      let player2Pokemon = player2Deck.shift();
+
+      let player1Power = calculatePower(player1Pokemon);
+      let player2Power = calculatePower(player2Pokemon);
+
+      let winner = player1Power > player2Power ? "Jogador 1" : player2Power > player1Power ? "Jogador 2" : "Empate";
+      
+      battleLog += `
+        <p><b>${player1Pokemon.name.toUpperCase()}</b> (${player1Power}) VS <b>${player2Pokemon.name.toUpperCase()}</b> (${player2Power}) - <span class="battle-result">${winner}</span></p>
+      `;
+
+      document.getElementById("battle-log").innerHTML = battleLog;
+      if (winner === "Jogador 1") player1Score++;
+      if (winner === "Jogador 2") player2Score++;
+
+      document.getElementById("player1-score").textContent = player1Score;
+      document.getElementById("player2-score").textContent = player2Score;
+
+      if (player1Deck.length === 0 || player2Deck.length === 0) {
+        document.getElementById("restart-btn").style.display = "inline-block";
+      }
+    };
+
+    document.getElementById("restart-btn").addEventListener("click", () => location.reload());
+  </script>
+</body>
+
+</html>

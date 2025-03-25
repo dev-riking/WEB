@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      function contarVogais(string) {
+        const vogais = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
+        const vogaisEncontradas = string
+          .split("")
+          .filter((char) => vogais.includes(char));
+
+        return vogaisEncontradas.length;
+      }
+
+      const palavra = prompt("Digite uma palavra:");
+      const numeroVogais = contarVogais(palavra);
+      alert(`A palavra '${palavra}' contém ${numeroVogais} vogais.`);
+    </script>
+
+  </head>
+  <body>
+    
+  </body>
+</html>

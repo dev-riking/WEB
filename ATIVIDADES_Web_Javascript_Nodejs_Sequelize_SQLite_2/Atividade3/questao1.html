@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="questao1.css">
+  </head>
+  <body>
+    <h1>Lista de Compras</h1>
+    <form id="formCompras">
+      <div class="categoria">
+        <label>
+          <input type="radio" name="categoria" value="Limpeza" required />
+          Limpeza
+        </label>
+        <label>
+          <input type="radio" name="categoria" value="Frutas" /> Frutas
+        </label>
+        <label>
+          <input type="radio" name="categoria" value="Mercearia" /> Mercearia
+        </label>
+        <label>
+          <input type="radio" name="categoria" value="Congelados" /> Congelados
+        </label>
+      </div>
+      <div>
+        <label for="entradaItem">Item:</label>
+        <input
+          type="text"
+          id="entradaItem"
+          placeholder="Digite o item"
+          required
+        />
+      </div>
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <div class="listas-container">
+      <h2>Itens Adicionados:</h2>
+      <div id="listas"></div>
+    </div>
+
+   <script src="questao1.js"></script>
+  </body>
+</html>

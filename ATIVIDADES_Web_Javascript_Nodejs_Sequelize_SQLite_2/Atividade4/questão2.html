@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Usuários - Tabela Responsiva</title>
+    <link rel="stylesheet" href="questao2.css">
+  </head>
+  <body>
+    <h1>Gerenciador de Usuários</h1>
+    <form id="userForm">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" name="telefone" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input type="date" id="dataNascimento" name="dataNascimento" required />
+      <label for="profissao">Profissão:</label>
+      <input type="text" id="profissao" name="profissao" />
+      <label for="endereco">Endereço:</label>
+      <input type="text" id="endereco" name="endereco" />
+      <button type="button" id="adicionar">Adicionar</button>
+    </form>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Data de Nascimento</th>
+            <th>Profissão</th>
+            <th>Endereço</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody"></tbody>
+      </table>
+    </div>
+ 
+    <script src="questao2.js"></script>
+  </body>
+</html>

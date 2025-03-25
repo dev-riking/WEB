@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Disciplinas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Ajuste para fazer os inputs ocuparem o espaço desejado */
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #2c3e50;
+            box-shadow: 0 0 5px rgba(44, 62, 80, 0.3);
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            grid-column: 1 / -1;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            form {
+                padding: 15px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Cadastro de Disciplinas</h1>
+    <form method="post" action="/disciplinas/cadastrar">
+        <label for="codigo">Código da Disciplina:</label>
+        <input type="text" id="codigo" name="codigo" placeholder="Digite o Código da Disciplina" required>
+
+        <label for="nome">Nome da Disciplina:</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite o Nome da Disciplina" required>
+
+        <label for="ch">Carga Horária (CH):</label>
+        <input type="number" id="ch" name="ch" placeholder="Digite a Cargo-Horária da Disciplina" required>
+
+        <label for="professor">Professor:</label>
+        <input type="text" id="professor" name="professor" placeholder="Digite o Professor da Disciplina" required>
+
+        <button type="submit">Cadastrar Disciplina</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Buttons com Ação</title>
+  <script src="questao3.js"></script>
+  <link rel="stylesheet" href="questao3.css">
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Escolha uma Opção e Execute a Ação</h1>
+
+  <form>
+    <label>
+      <input type="radio" name="opcao" value="adicionar" onclick="atualizarCampo('adicionar')"> Adicionar Valor
+    </label>
+    <br>
+    <label>
+      <input type="radio" name="opcao" value="excluirUltimo" onclick="atualizarCampo('excluirUltimo')"> Excluir Último
+      Valor
+    </label>
+    <br>
+    <label>
+      <input type="radio" name="opcao" value="excluirEspecifico" onclick="atualizarCampo('excluirEspecifico')"> Excluir
+      Valor Específico
+    </label>
+  </form>
+
+  <br>
+  <input type="text" id="campoTexto" placeholder="Escolha uma opção acima">
+
+  <br><br>
+  <button onclick="executarAcao()">Efetuar Ação</button>
+
+  <h3>Lista Atual:</h3>
+  <ul id="lista"></ul>
+
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Carros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Resetando margens e preenchimentos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Cor de fundo e fonte */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Banner de introdução */
+        .banner {
+            background-image: url('https://www.disalconsorcio.com.br/blog/wp-content/uploads/2022/10/pexels-mike-b-120049-1255x705.jpg'); /* Atualizando a URL da imagem */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .banner h1 {
+            font-size: 3em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            font-size: 1.5em;
+        }
+
+        /* Container de produtos */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        /* Cartão de carro */
+        .car-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Hover nos carros */
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .car-card h2 {
+            font-size: 1.6em;
+            color: #2c3e50;
+            padding: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .car-info {
+            padding: 20px;
+        }
+
+        .car-code {
+            font-size: 1.1em;
+            color: #90a8b8;
+            margin-bottom: 10px;
+        }
+
+        .car-price {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #1eaa59;
+            margin-bottom: 15px;
+        }
+
+        .car-category {
+            font-size: 1.2em;
+            color: #90a8b8;
+            margin-bottom: 20px;
+        }
+
+        /* Botão de compra */
+        .buy-btn {
+            display: block;
+            text-align: center;
+            background-color: #2305d1;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #16235c;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Banner de introdução -->
+    <div class="banner">
+        <h1>Bem-vindo à Loja de Carros</h1>
+        <p>Encontre o carro dos seus sonhos</p>
+    </div>
+
+    <!-- Container de carros -->
+    <div class="container">
+        <!-- Carro 1 -->
+        <div class="car-card">
+            <img src="https://cdn.motor1.com/images/mgl/1ZkqgW/s3/2023-bmw-x5.jpg" alt="BMW X5">
+            <h2>BMW X5</h2>
+            <div class="car-info">
+                <p class="car-code">Código: 1234XYZ</p>
+                <p class="car-price">R$ 299.999,00</p>
+                <p class="car-category">Categoria: SUV</p>
+                <a href="#" class="buy-btn">Comprar</a>
+            </div>
+        </div>
+
+        <!-- Carro 2 -->
+        <div class="car-card">
+            <img src="https://s2-autoesporte.glbimg.com/8VgdFt9NDPWS0bs6c1NGMVL3s8I=/83x57:1841x1120/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/v/5/uRISeYSH2NECIlDaEsgQ/audi-a4-quattro-35.jpeg" alt="Audi A4">
+            <h2>Audi A4</h2>
+            <div class="car-info">
+                <p class="car-code">Código: 5678ABC</p>
+                <p class="car-price">R$ 159.999,00</p>
+                <p class="car-category">Categoria: Sedan</p>
+                <a href="#" class="buy-btn">Comprar</a>
+            </div>
+        </div>
+
+        <!-- Carro 3 -->
+        <div class="car-card">
+            <img src="https://live.dealer-asset.co/images/br1001/news/ford-brasil-noticia-tecnologias-exclusivas-mustang-gt-27092024.jpg?s=1024" alt="Ford Mustang">
+            <h2>Ford Mustang</h2>
+            <div class="car-info">
+                <p class="car-code">Código: 9101DEF</p>
+                <p class="car-price">R$ 199.999,00</p>
+                <p class="car-category">Categoria: Esportivo</p>
+                <a href="#" class="buy-btn">Comprar</a>
+            </div>
+        </div>
+
+        <!-- Carro 4 -->
+        <div class="car-card">
+            <img src="https://cdn.motor1.com/images/mgl/rKn8jY/s3/chevrolet-tracker-premier-1.2t-2023.jpg" alt="Chevrolet Tracker">
+            <h2>Chevrolet Tracker</h2>
+            <div class="car-info">
+                <p class="car-code">Código: 1122GHI</p>
+                <p class="car-price">R$ 139.999,00</p>
+                <p class="car-category">Categoria: SUV</p>
+                <a href="#" class="buy-btn">Comprar</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

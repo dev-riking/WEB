@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      function contarCaracteres() {
+        const palavra = prompt("Digite a palavra:");
+        const caractere = prompt("Digite o caractere que deseja contar:");
+
+        if (caractere.length !== 1) {
+          alert("Por favor, insira apenas um caractere.");
+          return;
+        }
+
+        let contador = 0;
+
+        for (let i = 0; i < palavra.length; i++) {
+          if (palavra[i] === caractere) {
+            contador++;
+          }
+        }
+
+        alert(
+          `O caractere "${caractere}" aparece ${contador} vezes na string.`
+        );
+      }
+
+      contarCaracteres();
+    </script>
+    
+  </head>
+  <body></body>
+</html>

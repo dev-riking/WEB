@@ -1,0 +1,43 @@
+GET http://localhost:8080/carros
+
+###
+GET http://localhost:8080/carro/1234XYZ
+
+###
+GET http://localhost:8080/carros/categoria/SUV
+
+###
+POST http://localhost:8080/carro
+Content-Type: application/json
+
+{
+    "codigo": "1234X7i",
+    "nome": "ferrari",
+    "preco": "R$ 1.299.999,00",
+    "categoria": "Esportivo"
+}
+
+###
+PUT http://localhost:8080/carro/1234XYZ
+Content-Type: application/json
+
+{
+   "codigo": "1234XEB",
+    "nome": "BMW X4",
+    "preco": "R$ 199.999,00",
+    "categoria": "SUV"
+}
+
+###
+PATCH http://localhost:8080/carro/1234XYZ
+Content-Type: application/json
+
+{
+    "nome": "BMW X5"
+}
+
+###
+DELETE http://localhost:8080/carro/1234XYZ
+
+###
+GET http://localhost:8080/

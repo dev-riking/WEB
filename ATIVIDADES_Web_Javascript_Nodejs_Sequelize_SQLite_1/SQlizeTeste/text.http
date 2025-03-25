@@ -1,0 +1,31 @@
+http://localhost:8080/disciplinas/visualizar
+
+###
+GET http://localhost:8080/disciplinas/visualizar/001
+
+###
+POST http://localhost:8080/disciplinas/cadastrar
+Content-Type: application/json
+
+{
+    "codigo": "002",
+    "nome": "Games",
+    "ch": "900",
+    "professor": "Jonathan Guimarães"
+}
+
+
+###
+PUT http://localhost:8080/disciplinas/atualizar/010
+Content-Type: application/json
+
+{
+    "nome": "Edição de Videos",
+    "ch": "1200",
+    "professor": "Tonia Guimarães"
+}
+
+
+
+###
+DELETE http://localhost:8080/disciplinas/remover/010

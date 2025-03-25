@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Disciplinas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            gap: 20px; /* Espaçamento entre os itens */
+        }
+
+        ul li {
+            background-color: #f9f9f9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            width: calc(50% - 20px); /* Dividir o espaço em duas colunas */
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        ul li p {
+            margin: 5px 0;
+        }
+
+        /* Efeito hover nos itens da lista */
+        ul li:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            ul {
+                flex-direction: column;
+            }
+
+            ul li {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Disciplinas encontradas</h1>
+    <ul>
+        <% disciplinas.forEach((disc) => { %>
+            <li>
+                <p><strong>CÓDIGO:</strong> <%= disc.codigo %></p>
+                <p><strong>NOME:</strong> <%= disc.nome %></p>
+                <p><strong>CARGA-HORÁRIA:</strong> <%= disc.ch %> h</p>
+                <p><strong>PROFESSOR:</strong> <%= disc.professor %></p>
+
+                <button></button>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+
+</html>
